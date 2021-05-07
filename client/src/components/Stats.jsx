@@ -188,33 +188,82 @@ export default class Stats extends Component {
         return (
             <div className='flex'>
 
-                <div >
-                    <h3>top 5 sales</h3>
+                <div className='statsDiv'>
+                    <h2>top 5 sales</h2>
 
-                    {this.state.top5Sales.map(item => {
+                    <table>
+                        <tr>
+                            <td><h3>place</h3></td>
+                            <td><h3>product</h3></td>
+                            <td><h3>units</h3></td>
+                        </tr>
 
-                        return <h4>{item.product.title}</h4>
-                    })}
+                        {this.state.top5Sales.map((item, i) => {
+
+                            return (
+
+                                <tr>
+                                    <td>{i + 1}</td>
+                                    <td>{item.product.title}</td>
+                                    <td>{item.productCounter}</td>
+                                </tr>
+
+                            )
+                        })}
+
+                    </table>
 
                 </div>
 
                 <div>
-                    <h3>top 5 unique sales</h3>
+                    <h2>top 5 unique sales</h2>
 
-                    {this.state.top5UniqueSales.map(item => {
+                    <table>
+                        <tr>
+                            <td><h3>place</h3></td>
+                            <td><h3>product</h3></td>
+                            <td><h3>units</h3></td>
+                        </tr>
 
-                        return <h4>{item.product.title}</h4>
-                    })}
+                        {this.state.top5UniqueSales.map((item, i) => {
+
+                            return (
+
+                                <tr>
+                                    <td>{i + 1}</td>
+                                    <td>{item.product.title}</td>
+                                    <td>{item.productUniqueCounter}</td>
+                                </tr>
+
+                            )
+                        })}
+
+                    </table>
 
                 </div>
 
                 <div>
-                    <h3>past 5 days</h3>
+                    <h2>past 5 days</h2>
 
-                    {this.state.past5Days.map(item => {
+                    <table>
+                        <tr>
+                            <td><h3>day</h3></td>
+                            <td><h3>total</h3></td>
+                        </tr>
 
-                        return <h4>{item.Day} {item.total}</h4>
-                    })}
+                        {this.state.past5Days.map(item => {
+
+                            return (
+
+                                <tr>
+                                    <td>{item.Day}</td>
+                                    <td>{item.total} $</td>
+                                </tr>
+
+                            )
+                        })}
+
+                    </table>
 
                 </div>
 

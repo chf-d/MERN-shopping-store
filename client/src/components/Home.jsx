@@ -9,55 +9,59 @@ export default class Home extends Component {
 
         this.state = {
 
-            cart: false,
             cartList: [],
-            total: 0
-
+            total: 0,
+            display: 'none',
         }
     }
 
     displayCart = () => {
 
-        if (this.state.cart) {
+        if (this.state.cartList.length <= 0) {
 
-            if (this.state.cartList.length <= 0) {
+            return <h2>There is nothing in the cart</h2>
 
-                return <div>There is nothing in the cart</div>
+        }
+        else {
+            return (
+                <div>
+                    <table>
+                        <tr>
+                            <td>title</td>
+                            <td>price</td>
+                            <td>Image</td>
+                            <td>delete</td>
+                        </tr>
 
-            }
-            else {
-                return (
-                    <div>
+                        {this.state.cartList.map((item, i) => {
+                            return (
+                                <tr>
+                                    <td>{item.title}</td>
+                                    <td>{item.price}</td>
+                                    <td><img className="imgSize2" src={item.image} /></td>
+                                    <td>
+                                        <button id='removeFromCart' onClick={() => { this.removeFromCart(item, i) }}>❌</button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </table>
 
-                        <table>
-                            <tr>
-                                <td>title</td>
-                                <td>price</td>
-                                <td>Image</td>
-                                <td>delete</td>
-                            </tr>
+                    <h2>total = {this.state.total}</h2>
+                    <button className='sistemButton' onClick={this.finishTransaction}>buy</button>
+                </div>
+            )
+        }
 
-                            {this.state.cartList.map((item, i) => {
-                                return (
-                                    <tr>
-                                        <td>{item.title}</td>
-                                        <td>{item.price}</td>
-                                        <td><img className="imgSize2" src={item.image} /></td>
-                                        <td>
-                                            <button onClick={() => { this.removeFromCart(item, i) }}>❌</button>
-                                        </td>
-                                    </tr>
-                                )
-                            })}
-                        </table>
+    }
 
-                        <br />
-                        total = {this.state.total}
-                        <br />
-                        <button onClick={this.finishTransaction}>buy</button>
-                    </div>
-                )
-            }
+    setDisplay = () => {
+        if (this.state.display == 'none') {
+
+            this.setState({ display: 'block' })
+        }
+        else {
+            this.setState({ display: 'none' })
         }
     }
 
@@ -92,10 +96,13 @@ export default class Home extends Component {
     render() {
         return (
             <div>
+                <button className='sistemButton' onClick={() => { this.setDisplay() }} >cart</button><br />
 
-                <button className='sistemButton card' onClick={() => { this.setState({ cart: !this.state.cart }) }} >cart</button><br />
-                {this.displayCart()}
-
+                <div id='displayCart'>
+                    <div className='cart' style={{ display: this.state.display }}>
+                        {this.displayCart()}
+                    </div>
+                </div>
 
                 {this.props.productsList.map((item) => {
                     return <Product item={item} addToCart={this.addToCart} />

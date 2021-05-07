@@ -33,7 +33,7 @@ export default class Admin extends Component {
                         <td><input value={this.state.description} onChange={(e) => { this.setState({ description: e.target.value }) }} /></td>
                         <td><input value={this.state.image} onChange={(e) => { this.setState({ image: e.target.value }) }} /></td>
                         <td>
-                            <button onClick={() => { this.updateValues(id) }}>update</button>
+                            <button className='adminButton' onClick={() => { this.updateValues(id) }}>update</button>
                         </td>
                     </tr>
                 )
@@ -47,8 +47,8 @@ export default class Admin extends Component {
                         <td>{item.description}</td>
                         <td><img className="imgSize2" src={item.image} /></td>
                         <td>
-                            <button onClick={() => { this.saveValueforEditing(item, id) }}>edit</button>
-                            <button onClick={() => { this.props.removeProduct(item, id) }}>delete</button>
+                            <button className='adminButton' onClick={() => { this.saveValueforEditing(item, id) }}>edit</button>
+                            <button className='adminButton' onClick={() => { this.props.removeProduct(item, id) }}>delete</button>
                         </td>
                     </tr>
                 )
@@ -64,8 +64,8 @@ export default class Admin extends Component {
                     <td>{item.description}</td>
                     <td><img className="imgSize2" src={item.image} /></td>
                     <td>
-                        <button onClick={() => { this.saveValueforEditing(item, id) }}>edit</button>
-                        <button onClick={() => { this.props.removeProduct(item, id) }}>delete</button>
+                        <button className='adminButton' onClick={() => { this.saveValueforEditing(item, id) }}>edit</button>
+                        <button className='adminButton' onClick={() => { this.props.removeProduct(item, id) }}>delete</button>
                     </td>
                 </tr>
             )
@@ -125,9 +125,9 @@ export default class Admin extends Component {
                         <tr>
                             <td><input placeholder='title' onChange={(e) => { this.setState({ title: e.target.value }) }} /></td>
                             <td><input placeholder='price' onChange={(e) => { this.setState({ price: e.target.value }) }} /></td>
-                            <td><input placeholder='description' onChange={(e) => { this.setState({ description: e.target.value }) }} /></td>
-                            <td><input placeholder='image' onChange={(e) => { this.setState({ image: e.target.value }) }} /></td>
-                            <td><button onClick={() => { this.addproduct() }}>add</button></td>
+                            <td><input placeholder='description (At least 10 letters)' onChange={(e) => { this.setState({ description: e.target.value }) }} /></td>
+                            <td><input placeholder='image (url)' onChange={(e) => { this.setState({ image: e.target.value }) }} /></td>
+                            <td><button className='adminButton' onClick={() => { this.addproduct() }}>add</button></td>
                         </tr>
 
                     </table><br />
@@ -147,11 +147,11 @@ export default class Admin extends Component {
 
                 <table>
                     <tr>
-                        <td>title</td>
-                        <td>price</td>
-                        <td>description</td>
-                        <td>image</td>
-                        <td>edit/delete</td>
+                        <td><h3>title</h3></td>
+                        <td><h3>price</h3></td>
+                        <td><h3>description</h3></td>
+                        <td><h3>image</h3></td>
+                        <td><h3>edit/delete</h3></td>
                     </tr>
 
                     {this.props.productsList.map((item, i) => {
